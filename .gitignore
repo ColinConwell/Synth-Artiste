@@ -1,0 +1,25 @@
+# IDE Cache
+.vscode/
+.cursor/
+.cursorignore
+
+# Environ
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
+*.pyzw
+*.pyzwz
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS-generated
+.DS_Store
