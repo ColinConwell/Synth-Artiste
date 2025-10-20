@@ -4,8 +4,10 @@
 .cursorignore
 
 # Environ
+.venv/
 .env.*
 !.env.example
+.env.local
 
 # Python
 __pycache__/
@@ -23,3 +25,6 @@ __pycache__/
 
 # OS-generated
 .DS_Store
+
+# Outputs
+outputs/
