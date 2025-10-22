@@ -78,7 +78,7 @@ async def main() -> None:
         concurrency=6,
         retries=4,
         request_timeout=120.0,
-        output_dir=Path("outputs"),
+        output_dir=ROOT / "outputs",
     )
 
     results = await generate_dataset(artists=artists, content_prompts=content_prompts, config=config)

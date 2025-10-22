@@ -36,7 +36,9 @@ async def generate_dataset(
 
     Returns list of (output_path, content_prompt) for all completed generations.
     """
-    run_dir = config.resolved_output_dir() / f"run-{now_run_id()}"
+    run_dir = (
+        config.resolved_output_dir() / (config.run_name or f"run-{now_run_id()}")
+    )
     ensure_dir(run_dir)
 
     artists = list(artists)
@@ -64,5 +66,3 @@ async def generate_dataset(
             raise res
         output.append(res)
     return output
-
-

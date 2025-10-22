@@ -20,6 +20,7 @@ class ImageConfig:
 
     # Output
     output_dir: Path = Path("outputs")
+    run_name: Optional[str] = None  # if set, use this exact run directory name under output_dir
 
     def resolved_output_dir(self) -> Path:
         return self.output_dir.resolve()
