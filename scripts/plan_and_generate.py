@@ -114,6 +114,7 @@ async def main() -> None:
     parser.add_argument("--plan_only", action="store_true")
     parser.add_argument("--run_name", type=str, default=None)
     parser.add_argument("--skip_clip", action="store_true", help="Skip CLIP evaluation (useful on macOS with threading issues)")
+    parser.add_argument("--quality", choices=["low", "medium", "high"], default="high")
     args = parser.parse_args()
 
     load_env()
@@ -129,7 +130,7 @@ async def main() -> None:
         return
 
     run_name = args.run_name or f"run-{now_run_id()}"
-    config = ImageConfig(size="1024x1024", quality="high", concurrency=6, retries=4, output_dir=ROOT / "outputs", run_name=run_name)
+    config = ImageConfig(size="1024x1024", quality=args.quality, concurrency=6, retries=4, output_dir=ROOT / "outputs", run_name=run_name)
     run_dir = (ROOT / "outputs" / run_name)
     ensure_dir(run_dir)
     # Early pointer and pre-manifest stub so the run dir is visible even if generation fails

@@ -30,16 +30,21 @@ class CLIPImageEmbedder:
     def __init__(self, device: str | None = None) -> None:
         from transformers import CLIPModel, CLIPProcessor  # lazy import
 
-        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        from .images import device_name
+        self.device = device_name(device)
         self.model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14").to(self.device)
         self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
         self.model.eval()
 
     @torch.inference_mode()
     def embed_images(self, image_paths: Iterable[Path]) -> np.ndarray:
-        images = [Image.open(p).convert("RGB") for p in image_paths]
+        from .images import as_image
+        images = [as_image(p) for p in image_paths]
         inputs = self.processor(images=images, return_tensors="pt", padding=True).to(self.device)
         image_features = self.model.get_image_features(**inputs)
+        # Transformers 5 returns projected features inside a ModelOutput.
+        if hasattr(image_features, "pooler_output"):
+            image_features = image_features.pooler_output
         image_features = image_features / image_features.norm(p=2, dim=-1, keepdim=True)
         return image_features.detach().cpu().numpy().astype(np.float32)
 

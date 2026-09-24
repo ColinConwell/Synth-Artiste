@@ -22,6 +22,8 @@ class ImageConfig:
     output_dir: Path = Path("outputs")
     run_name: Optional[str] = None  # if set, use this exact run directory name under output_dir
 
+    model: str = "gpt-image-2.5-flare"
+
     def resolved_output_dir(self) -> Path:
         return self.output_dir.resolve()
 

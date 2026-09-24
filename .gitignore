@@ -1,7 +1,15 @@
+# Outputs
+outputs/
+
 # IDE Cache
 .vscode/
 .cursor/
 .cursorignore
+
+# ADE Cache
+.claude/
+.codex/
+.gemini/
 
 # Environ
 .venv/
@@ -25,6 +33,11 @@ __pycache__/
 
 # OS-generated
 .DS_Store
+# Package and Test Artifacts
+*.egg-info/
+.pytest_cache/
+build/
+dist/
 
-# Outputs
-outputs/
+# DreamSim Download Cache
+models/

@@ -1,7 +1,29 @@
-openai>=1.43.0
-python-dotenv>=1.0.1
-numpy>=1.26.0
-Pillow>=10.4.0
-torch>=2.2.0
-transformers>=4.44.0
+# Core library and API providers
+numpy>=1.26
+Pillow>=10.4
+python-dotenv>=1.0
+openai>=2
+google-genai>=1
+scipy>=1.12
+scikit-learn>=1.5
+matplotlib>=3.8
 
+# Local models: pip install -r requirements.txt with these uncommented,
+# or pip install -e '.[vision,notebooks,test]'
+# torch>=2.7
+# torchvision>=0.22
+# diffusers>=0.35
+# transformers>=5
+# accelerate>=1
+# peft>=0.19
+# dreamsim>=0.2
+# lpips>=0.1.4
+# tpips
+# timm
+# einops
+# umap-learn>=0.5
+# nbformat>=5
+# nbclient>=0.10
+# ipykernel>=6
+# jupyterlab>=4
+# pytest>=8

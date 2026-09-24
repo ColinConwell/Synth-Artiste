@@ -22,7 +22,7 @@ def get_client() -> AsyncOpenAI:
 async def generate_image_bytes(prompt: str, config: ImageConfig) -> bytes:
     client = get_client()
     kwargs = {
-        "model": "gpt-image-1",
+        "model": config.model,
         "prompt": prompt,
         "size": config.size,
         "quality": config.quality,

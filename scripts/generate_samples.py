@@ -1,3 +1,4 @@
+import argparse
 import asyncio
 import os
 import sys
@@ -64,17 +65,23 @@ def build_content_prompts() -> list[str]:
 
 
 async def main() -> None:
+    parser = argparse.ArgumentParser(description="Generate a matched artist sample set")
+    parser.add_argument("--num-per-artist", type=int, default=10)
+    parser.add_argument("--quality", choices=["low", "medium", "high"], default="high")
+    args = parser.parse_args()
+    if args.num_per_artist < 1:
+        parser.error("--num-per-artist must be positive")
     load_env()
     # Verify API key presence early for clearer errors
     if not (os.getenv("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")):
         raise RuntimeError("OPENAI_API_KEY is not set in environment.")
 
     artists = build_artists()
-    content_prompts = build_content_prompts()
+    content_prompts = build_content_prompts()[:args.num_per_artist]
 
     config = ImageConfig(
         size="1024x1024",
-        quality="high",
+        quality=args.quality,
         concurrency=6,
         retries=4,
         request_timeout=120.0,
